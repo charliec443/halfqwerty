@@ -77,10 +77,10 @@ Loop % StrLen(original)
   c2 := SubStr(mirrored, A_Index, 1)
   Hotkey Space & %c1%, DoHotkey
   Hotkey Space & %c2%, DoHotkey
-  Hotkey %c1%, KeyDown
-  Hotkey %c1% UP, KeyUP
-  Hotkey %c2%, KeyDown ; see post by guest below seems to improve the script haven't tried this myself so comment these two lines if it doesn't work
-  Hotkey %c2% UP, KeyUP ;
+  ;Hotkey %c1%, KeyDown
+  ;Hotkey %c1% UP, KeyUP
+  ;Hotkey %c2%, KeyDown ; see post by guest below seems to improve the script haven't tried this myself so comment these two lines if it doesn't work
+  ;Hotkey %c2% UP, KeyUP ;
 }
 
 return
