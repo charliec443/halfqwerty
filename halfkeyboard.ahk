@@ -77,10 +77,10 @@ Loop % StrLen(original)
   c2 := SubStr(mirrored, A_Index, 1)
   Hotkey Space & %c1%, DoHotkey
   Hotkey Space & %c2%, DoHotkey
-  Hotkey %c1%, KeyDown
-  Hotkey %c1% UP, KeyUP
-  Hotkey %c2%, KeyDown ; see post by guest below seems to improve the script haven't tried this myself so comment these two lines if it doesn't work
-  Hotkey %c2% UP, KeyUP ;
+  ;Hotkey %c1%, KeyDown
+  ;Hotkey %c1% UP, KeyUP
+  ;Hotkey %c2%, KeyDown ; see post by guest below seems to improve the script haven't tried this myself so comment these two lines if it doesn't work
+  ;Hotkey %c2% UP, KeyUP ;
 }
 
 return
@@ -146,7 +146,7 @@ If (KeyIsDown < 1 or ThisKey <> LastKey)
                LastKey := ThisKey
                Send %Modifiers%{%MirrorKey%}
                SetKeyDelay, 65535
-               SetTimer, ReplaceWithUpperMirror, %UpperDelay%
+               ;SetTimer, ReplaceWithUpperMirror, %UpperDelay%
           }
 
 Return
@@ -191,13 +191,20 @@ Return
 
 KeyDown:
    Key:=A_ThisHotkey
+		Modifiers := ""
+		If (GetKeyState("Shift") + GetKeyState("CapsLock", "T") = 1) 
+			{
+				; only add if Shift is held OR CapsLock is on (XOR) (both held down would result in value of 2)
+				Modifiers .= "+"
+			}
         If (KeyIsDown < 1 or Key <> LastKey)
            {
                 KeyIsDown := True
                 LastKey := Key
-                Send %Key%
+				Send %Modifiers%{%Key%}
+                ;Send %Key%
                 SetKeyDelay, 65535
-                SetTimer, ReplaceWithUpper, %UpperDelay%
+                ;SetTimer, ReplaceWithUpper, %UpperDelay%
            }
         Return
 
